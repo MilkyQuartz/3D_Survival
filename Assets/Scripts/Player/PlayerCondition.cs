@@ -3,7 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCondition : MonoBehaviour
+public interface IDamageable
+{
+    void TakePhysicalIDamage(int damage);
+}
+
+public class PlayerCondition : MonoBehaviour, IDamageable
 {
 
     public UICondition uiCondition;
@@ -13,6 +18,7 @@ public class PlayerCondition : MonoBehaviour
     Condition stamina { get { return uiCondition.stamina; } }
 
     public float noHungerHealthDecay;
+    public event Action OnTakeDamage;
 
     void Start()
     {
@@ -49,5 +55,11 @@ public class PlayerCondition : MonoBehaviour
     public void Die()
     {
         Debug.Log("ав╬З╢ы.");
+    }
+
+    public void TakePhysicalIDamage(int damage)
+    {
+        health.Subtract(damage);
+        OnTakeDamage?.Invoke();
     }
 }
