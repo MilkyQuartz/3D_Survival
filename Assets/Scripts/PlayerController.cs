@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,12 +7,26 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     private Vector2 curMovementInput;
+    public float jumptForce;
+    public LayerMask groundLayerMask;
 
-    private Rigidbody _rigdbody;
+    [Header("Look")]
+    public Transform cameraContainer;
+    public float minXLook;
+    public float maxXLook;
+    private float camCurXRot;
+    public float lookSensitivity;
+
+    private Vector2 mouseDelta;
+
+    [HideInInspector]
+    public bool canLook = true;
+
+    private Rigidbody rigidbody;
 
     private void Awake()
     {
-        _rigdbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     void Start()
@@ -21,37 +34,86 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Move();
     }
 
-    // 실제로 이동을 할 함수
-    void Move()
+    private void LateUpdate()
     {
-        // forward는 W값 S값 (앞으로가고 뒤로가고), right는 A값 D값 (좌우)
-        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-
-        // 방향값을 정해주고 힘을 곱해주는거 
-        dir *= moveSpeed;
-
-        // 이 부분은 공부필요
-        dir.y = _rigdbody.velocity.y;
-        _rigdbody.velocity = dir;
+        if (canLook)
+        {
+            CameraLook();
+        }
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnLookInput(InputAction.CallbackContext context)
     {
-        // pahse는 현재 상태 
-        if(context.phase == InputActionPhase.Performed) // Started는 키가 시작했을때(키가 눌렸을때) 한번, Performed는 키가 눌린뒤에도 값을 계속 받아옴
+        mouseDelta = context.ReadValue<Vector2>();
+    }
+
+    public void OnMoveInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
         {
-            // ReadValue는 값을 읽어올때
             curMovementInput = context.ReadValue<Vector2>();
         }
-        else if(context.phase == InputActionPhase.Canceled) // 키가 취소됐을때
+        else if (context.phase == InputActionPhase.Canceled)
         {
-            // 가만히 있어야하니깐 벡터값에는 아무것도 들어가면 안됨
             curMovementInput = Vector2.zero;
         }
+    }
+
+    public void OnJumpInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started && IsGrounded())
+        {
+            rigidbody.AddForce(Vector2.up * jumptForce, ForceMode.Impulse);
+        }
+    }
+
+    private void Move()
+    {
+        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
+        dir *= moveSpeed;
+        dir.y = rigidbody.velocity.y;
+
+        rigidbody.velocity = dir;
+    }
+
+    void CameraLook()
+    {
+        camCurXRot += mouseDelta.y * lookSensitivity;
+        camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
+        cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+
+        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+    }
+
+    bool IsGrounded()
+    {
+        Ray[] rays = new Ray[4]
+        {
+            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.01f), Vector3.down)
+        };
+
+        for (int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void ToggleCursor(bool toggle)
+    {
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }
