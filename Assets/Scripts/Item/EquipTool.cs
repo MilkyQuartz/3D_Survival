@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EquipTool : Equip
 {
+    public float useStamina;
     public float attackRate;
     private bool attacking;
     public float attackDistance;
@@ -26,9 +27,12 @@ public class EquipTool : Equip
     {
         if (!attacking)
         {
-            attacking = true;
-            animator.SetTrigger("Attack");
-            Invoke("OnCanAttack", attackRate);
+            if (CharacterManager.Instance.Player.condition.UseStamina(useStamina))
+            {
+                attacking = true;
+                animator.SetTrigger("Attack");
+                Invoke("OnCanAttack", attackRate);
+            }
         }
     }
 
