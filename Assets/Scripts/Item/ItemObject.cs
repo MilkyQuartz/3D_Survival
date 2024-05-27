@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemObject : MonoBehaviour
+public class ItemObject : MonoBehaviour, IInteractable
 {
-    // Start is called before the first frame update
-    void Start()
+    public ItemData data;
+
+    public string GetInteractPrompt()
     {
-        
+        string str = $"{data.displayName}\n{data.description}";
+        return str;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnInteract()
     {
-        
+        CharacterManager.Instance.Player.itemData = data;
+        CharacterManager.Instance.Player.addItem?.Invoke();
+        Destroy(gameObject);
     }
 }
