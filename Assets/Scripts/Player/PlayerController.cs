@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     public Action inventory;
 
     protected Rigidbody rigidbody;
+    public GameObject objectA;
+    public GameObject objectB;
+    private bool isObjectAActive = true;
 
     private void Awake()
     {
@@ -113,12 +116,25 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    public void OnInventory(InputAction.CallbackContext callbackContext)
+    public void OnInventory(InputAction.CallbackContext context)
     {
-        if (callbackContext.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started)
         {
             inventory?.Invoke();
             ToggleCursor();
+        }
+    }
+
+    public void OnChangedCamera(InputAction.CallbackContext context)
+    {
+        if (context.action.triggered && context.control.device is Keyboard && context.control.name == "c")
+        {
+            // 키가 눌렸을 때 상태 변경
+            isObjectAActive = !isObjectAActive;
+
+            // 상태에 따라 오브젝트 활성화/비활성화
+            objectA.SetActive(isObjectAActive);
+            objectB.SetActive(!isObjectAActive);
         }
     }
 
