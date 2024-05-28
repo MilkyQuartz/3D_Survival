@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     public Action inventory;
 
-    private Rigidbody rigidbody;
+    protected Rigidbody rigidbody;
 
     private void Awake()
     {
