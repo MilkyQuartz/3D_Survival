@@ -1032,7 +1032,7 @@ MonoBehaviour:
   health: {fileID: 1791406024}
   hunger: {fileID: 440197088}
   stamina: {fileID: 1225393189}
-  cold: {fileID: 0}
+  cold: {fileID: 1823224099}
 --- !u!1001 &285912706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5170,8 +5170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   damageRate: 1
-  cold: 0
-  coldHealingRate: 0
+  heal: 10
+  healRate: 1
 --- !u!1001 &1128199028
 PrefabInstance:
   m_ObjectHideFlags: 0

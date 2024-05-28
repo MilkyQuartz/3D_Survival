@@ -16,6 +16,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     Condition health { get { return uiCondition.health; } }
     Condition hunger { get { return uiCondition.hunger; } }
     Condition stamina { get { return uiCondition.stamina; } }
+    Condition cold { get { return uiCondition.cold; } }
 
     public float noHungerHealthDecay;
     public event Action OnTakeDamage;
@@ -30,8 +31,9 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     {
         hunger.Subtract(hunger.regenRate * Time.deltaTime);
         stamina.Add(stamina.regenRate * Time.deltaTime);
+        cold.Subtract(cold.regenRate * Time.deltaTime);
 
-        if(hunger.curValue == 0f)
+        if(hunger.curValue == 0f || cold.curValue == 0f)
         {
             health.Subtract(noHungerHealthDecay * Time.deltaTime);
         }
@@ -45,6 +47,10 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     public void Heal(float amount)
     {
         health.Add(amount);
+    }
+    public void ColdHeal(float amount)
+    {
+        cold.Add(amount);
     }
 
     public void Eat(float amount) 
@@ -86,5 +92,9 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(waitTime);
 
         transform.localScale = new Vector3(1, 1, 1);
+    }
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 }

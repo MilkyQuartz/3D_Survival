@@ -246,4 +246,9 @@ public class NPC : MonoBehaviour, IDamageable
         for (int x = 0; x < meshRenderers.Length; x++)
             meshRenderers[x].material.color = Color.white;
     }
+
+    public void Heal(float amount)
+    {
+        throw new System.NotImplementedException();
+    }
 }

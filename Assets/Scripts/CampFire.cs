@@ -6,6 +6,7 @@ public class CampFire : MonoBehaviour
 {
     public int damage;
     public float damageRate;
+    public float healRate;
 
     List<IDamageable> damageables = new List<IDamageable>();
 
