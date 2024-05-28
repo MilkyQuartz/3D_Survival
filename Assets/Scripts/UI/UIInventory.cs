@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +11,7 @@ public class UIInventory : MonoBehaviour
     public GameObject inventoryWindow;
     public Transform slotPanel;
     public Transform dropPosition;
+
 
     [Header("Selected Item")]
     private ItemSlot selectedItem;
@@ -207,12 +209,14 @@ public class UIInventory : MonoBehaviour
                 {
                     case SpecialConsumableType.Scale:
                         condition.IncreaseSize(selectedItem.item.specialConsumable[i].value);
+                        condition.ResetSizeAfterDelay(3f); ;
                         break;
                 }
             }
             RemoveSelctedItem();
         }
     }
+
 
     public void OnDropButton()
     {

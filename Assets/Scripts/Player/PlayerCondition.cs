@@ -76,6 +76,16 @@ public class PlayerCondition : MonoBehaviour, IDamageable
 
     public void IncreaseSize(float amount)
     {
-        transform.localScale += new Vector3(amount, amount, amount);
+        transform.localScale = new Vector3(amount, amount, amount);
+    }
+    public void ResetSizeAfterDelay(float waitTime)
+    {
+        StartCoroutine(ResetSize(waitTime));
+    }
+    IEnumerator ResetSize(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        transform.localScale = new Vector3(1, 1, 1);
     }
 }
