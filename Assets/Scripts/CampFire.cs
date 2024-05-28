@@ -7,7 +7,8 @@ public class CampFire : MonoBehaviour
     public int damage;
     public float damageRate;
 
-    List<IDamageable> things = new List<IDamageable>();
+    List<IDamageable> damageables = new List<IDamageable>();
+
     void Start()
     {
         InvokeRepeating("DealDamage", 0, damageRate);
@@ -15,25 +16,25 @@ public class CampFire : MonoBehaviour
 
     void DealDamage()
     {
-        for (int i = 0; i < things.Count; i++)
+        for (int i = 0; i < damageables.Count; i++)
         {
-            things[i].TakePhysicalIDamage(damage);
+            damageables[i].TakePhysicalIDamage(damage);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out IDamageable damageable))
+        if (other.TryGetComponent(out IDamageable damageable))
         {
-            things.Add(damageable);
+            damageables.Add(damageable);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.TryGetComponent(out IDamageable damageable))
+        if (other.TryGetComponent(out IDamageable damageable))
         {
-            things.Remove(damageable);
+            damageables.Remove(damageable);
         }
     }
 }
