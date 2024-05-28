@@ -3,7 +3,8 @@
     public enum TrickItemType
     {
         JumpPad,
-        MovePad
+        MovePad,
+        Ladder
     }
 
     [CreateAssetMenu(fileName = "TrickItem", menuName = "Trick New Item")]
@@ -22,4 +23,8 @@
         public GameObject movePadPrefab;
         public float moveSpeed;
         public float moveDistance;
+
+        [Header("Ladder")]
+        public GameObject radderPrefab;
+        public float radderSpeed;
 }
