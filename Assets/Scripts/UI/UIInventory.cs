@@ -162,7 +162,7 @@ public class UIInventory : MonoBehaviour
             selectedItemStatValue.text += selectedItem.item.consumables[i].value.ToString() + "\n";
         }
 
-        useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
+        useButton.SetActive(selectedItem.item.type == ItemType.Consumable || selectedItem.item.type == ItemType.SpecialConsumable);
         equipButton.SetActive(selectedItem.item.type == ItemType.Equipable && !slots[index].equipped);
         unEquipButton.SetActive(selectedItem.item.type == ItemType.Equipable && slots[index].equipped);
         dropButton.SetActive(true);
@@ -195,6 +195,19 @@ public class UIInventory : MonoBehaviour
                         condition.Heal(selectedItem.item.consumables[i].value); break;
                     case ConsumableType.Hunger:
                         condition.Eat(selectedItem.item.consumables[i].value); break;
+                }
+            }
+            RemoveSelctedItem();
+        }
+        else if(selectedItem.item.type == ItemType.SpecialConsumable)
+        {
+            for (int i = 0; i < selectedItem.item.specialConsumable.Length; i++)
+            {
+                switch (selectedItem.item.specialConsumable[i].type)
+                {
+                    case SpecialConsumableType.Scale:
+                        condition.IncreaseSize(selectedItem.item.specialConsumable[i].value);
+                        break;
                 }
             }
             RemoveSelctedItem();

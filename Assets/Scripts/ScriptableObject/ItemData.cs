@@ -6,19 +6,33 @@ public enum ItemType
 {
     Resource,
     Equipable,
-    Consumable
+    Consumable,
+    SpecialConsumable
 }
 
-public enum ConsumableType
+public enum ConsumableType //체력, 배고픔 회복 아이템
 {
     Hunger,
     Health
+}
+
+public enum SpecialConsumableType // 스페셜 아이템
+{
+    Scale,
+    Speed
 }
 
 [System.Serializable]
 public class ItemDataConsumable
 {
     public ConsumableType type;
+    public float value;
+}
+
+[System.Serializable]
+public class SpecialItemDataConsumable
+{
+    public SpecialConsumableType type;
     public float value;
 }
 
@@ -38,6 +52,9 @@ public class ItemData : ScriptableObject
 
     [Header("Consumable")]
     public ItemDataConsumable[] consumables;
+
+    [Header("Special")]
+    public SpecialItemDataConsumable[] specialConsumable;
 
     [Header("Equip")]
     public GameObject equipPrefab;

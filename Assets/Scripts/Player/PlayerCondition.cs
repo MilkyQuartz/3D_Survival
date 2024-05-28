@@ -16,6 +16,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     Condition health { get { return uiCondition.health; } }
     Condition hunger { get { return uiCondition.hunger; } }
     Condition stamina { get { return uiCondition.stamina; } }
+    Condition scale { get { return uiCondition.scale; } }
 
     public float noHungerHealthDecay;
     public event Action OnTakeDamage;
@@ -71,5 +72,10 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         }
         stamina.Subtract(amount);
         return true;
+    }
+
+    public void IncreaseSize(float amount)
+    {
+        transform.localScale += new Vector3(amount, amount, amount);
     }
 }
