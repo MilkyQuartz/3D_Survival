@@ -43,7 +43,7 @@ public class Equipment : MonoBehaviour
             // 장착 해제 시 이동 속도를 원래대로 되돌림
             if (curEquip is EquipTool equipTool)
             {
-                foreach (var ability in equipTool.data.ability) // curEquip.data 참조
+                foreach (var ability in equipTool.data.ability) 
                 {
                     if (ability.type == EquipAbilityType.Speed)
                     {
@@ -52,7 +52,6 @@ public class Equipment : MonoBehaviour
                 }
             }
 
-            // 장비 데이터를 null로 설정하여 장비 해제를 나타냄
             curEquip.data = null;
             controller.currentMoveSpeed = controller.moveSpeed;
 

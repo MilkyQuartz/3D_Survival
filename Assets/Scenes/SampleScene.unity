@@ -4768,7 +4768,7 @@ Transform:
   m_GameObject: {fileID: 1112057249}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.16, y: 0.8, z: 37.54}
+  m_LocalPosition: {x: 26.16, y: 0.8, z: 40.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4965,6 +4965,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7981d07b-4e52-4d24-b7ff-bf031beba41b
     m_ActionName: Player/CameraMove[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1112057254}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDivingJumpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3aac6867-4de1-4fe8-9944-c291b1abe014
+    m_ActionName: Player/DivingJump[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4983,13 +4999,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  currentMoveSpeed: 0
   jumptForce: 80
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 55
   cameraContainer: {fileID: 1012370745}
-  minXLook: -85
-  maxXLook: 85
+  minXLook: -50
+  maxXLook: 50
   lookSensitivity: 0.2
   canLook: 1
   objectA: {fileID: 1012370744}
@@ -8940,6 +8957,107 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &6717800427439321817
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2559187723001888107, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559187723001888107, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559187723001888107, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559187723001888107, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559187723001888107, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 30.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.515
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 53.367
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571269708314982587, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558677666128584483, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_Name
+      value: TrickItem_DivingJumpPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646858827771192657, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646858827771192657, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646858827771192657, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_Size.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646858827771192657, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646858827771192657, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+      propertyPath: m_Center.z
+      value: 0.3600006
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
 --- !u!1001 &7047979234487341361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9168,6 +9286,7 @@ SceneRoots:
   - {fileID: 674266349}
   - {fileID: 2093119492}
   - {fileID: 240587858}
+  - {fileID: 6717800427439321817}
   - {fileID: 7047979234487341361}
   - {fileID: 1731666589926959699}
   - {fileID: 1132000333}

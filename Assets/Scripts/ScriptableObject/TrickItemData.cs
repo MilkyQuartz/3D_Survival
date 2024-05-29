@@ -4,7 +4,8 @@
     {
         JumpPad,
         MovePad,
-        Ladder
+        Ladder,
+        DivingJumpPad
     }
 
     [CreateAssetMenu(fileName = "TrickItem", menuName = "Trick New Item")]
@@ -27,4 +28,8 @@
         [Header("Ladder")]
         public GameObject radderPrefab;
         public float radderSpeed;
+
+        [Header("DivingJumpPad")]
+        public GameObject DivingjumpPadPrefab;
+        public float DivingjumpForce;
 }

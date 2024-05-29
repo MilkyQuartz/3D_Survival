@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd58516638f60684b96eef386f44db15, type: 3}
+  m_Name: TrickItem_DivingJumpPad
+  m_EditorClassIdentifier: 
+  displayName: "\uB2E4\uC774\uBE59\uB300"
+  description: "\uBA38\uB098\uBA3C \uBC14\uB2E4\uB85C \uB5A0\uB098\uBD05\uC2DC\uB2E4."
+  trickItemType: 3
+  jumpPadPrefab: {fileID: 0}
+  jumpForce: 0
+  movePadPrefab: {fileID: 0}
+  moveSpeed: 0
+  moveDistance: 0
+  radderPrefab: {fileID: 0}
+  radderSpeed: 0
+  DivingjumpPadPrefab: {fileID: 7558677666128584483, guid: c322c1448696fd24390bf8a5a8e89874, type: 3}
+  DivingjumpForce: 200

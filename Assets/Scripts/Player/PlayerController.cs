@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public GameObject objectA;
     public GameObject objectB;
     private bool isObjectAActive = true;
+    private TrickItemObject currentTrickItem;
 
     private void Awake()
     {
@@ -83,6 +85,48 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnDivingJumpInput(InputAction.CallbackContext context) // 다이빙대에서 Q 누르면 튀어나감 
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (currentTrickItem != null && currentTrickItem.trickItemData.trickItemType == TrickItemType.DivingJumpPad)
+            {
+                StartCoroutine(DiveToTarget());
+            }
+        }
+    }
+
+    private IEnumerator DiveToTarget()
+    {
+        Vector3 startPos = transform.position; // 플레이어 위치
+        Vector3 endPos = transform.position + transform.forward * 20f + Vector3.down * 10f; // 목표 지점 (Z 방향으로 +20, Y 방향으로 -7)
+        float height = 5f; // 포물선의 높이
+        float duration = 1.5f; // 이동하는 데 걸리는 시간
+        float elapsedTime = 0f; // 경과 시간
+
+        while (elapsedTime < duration)
+        {
+            // 포물선 운동 계산
+            Vector3 targetPos = Parabola(startPos, endPos, height, elapsedTime / duration);
+            // 이동
+            transform.position = targetPos;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+    // 포물선 운동을 계산하는 함수
+    protected static Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
+    {
+        Func<float, float> f = x => -4 * height * x * x + 4 * height * x;
+        Vector3 mid = Vector3.Lerp(start, end, t);
+        return new Vector3(mid.x, f(t) + Mathf.Lerp(start.y, end.y, t), mid.z);
+    }
+
+    public void SetCurrentTrickItem(TrickItemObject item)
+    {
+        currentTrickItem = item;
+    }
     private void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;

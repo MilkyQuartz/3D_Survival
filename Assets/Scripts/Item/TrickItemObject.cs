@@ -49,6 +49,10 @@ public class TrickItemObject : MonoBehaviour, IInteractable
                         isClimbing = true;
                         playerRigidbody.useGravity = false;
                         break;
+                    case TrickItemType.DivingJumpPad:
+                        Debug.Log("´ÙÀÌºù´ë¶û Ãæµ¹");
+                        CharacterManager.Instance.Player.GetComponent<PlayerController>().SetCurrentTrickItem(this);
+                        break;
                 }
             }
         }
