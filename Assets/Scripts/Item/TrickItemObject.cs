@@ -11,6 +11,7 @@ public class TrickItemObject : MonoBehaviour, IInteractable
 
     private Rigidbody playerRigidbody;
 
+
     private void Start()
     {
         playerObject = CharacterManager.Instance.Player.gameObject;

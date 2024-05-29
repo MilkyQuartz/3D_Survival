@@ -5,7 +5,8 @@
         JumpPad,
         MovePad,
         Ladder,
-        DivingJumpPad
+        DivingJumpPad,
+        Ray
     }
 
     [CreateAssetMenu(fileName = "TrickItem", menuName = "Trick New Item")]
@@ -32,4 +33,7 @@
         [Header("DivingJumpPad")]
         public GameObject DivingjumpPadPrefab;
         public float DivingjumpForce;
+
+        [Header("Ray")]
+        public GameObject rayPrefab;
 }
