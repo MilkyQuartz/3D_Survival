@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
+    public float currentMoveSpeed;
     private Vector2 curMovementInput;
     public float jumptForce;
     public LayerMask groundLayerMask;
@@ -36,7 +37,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        currentMoveSpeed = moveSpeed;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    public void ModifyMoveSpeed(float value)
+    {
+        currentMoveSpeed = moveSpeed + value;
     }
 
     private void FixedUpdate()
@@ -80,7 +86,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
+        dir *= currentMoveSpeed; 
         dir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = dir;

@@ -9017,14 +9017,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_Ax
       objectReference: {fileID: 0}
-    - target: {fileID: 1956159573249181414, guid: 27089ce222ebb6c4c939c5b6836fafc7, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3910413669480241304, guid: 27089ce222ebb6c4c939c5b6836fafc7, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 6205982019615545884, guid: 27089ce222ebb6c4c939c5b6836fafc7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.79

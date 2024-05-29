@@ -21,6 +21,11 @@ public enum SpecialConsumableType // 스페셜 아이템
     Scale,
     Speed
 }
+public enum EquipAbilityType // 장비별 능력
+{
+    Damage,
+    Speed
+}
 
 [System.Serializable]
 public class ItemDataConsumable
@@ -33,6 +38,13 @@ public class ItemDataConsumable
 public class SpecialItemDataConsumable
 {
     public SpecialConsumableType type;
+    public float value;
+}
+
+[System.Serializable]
+public class EquipAbility
+{
+    public EquipAbilityType type;
     public float value;
 }
 
@@ -58,4 +70,5 @@ public class ItemData : ScriptableObject
 
     [Header("Equip")]
     public GameObject equipPrefab;
+    public EquipAbility[] ability;
 }

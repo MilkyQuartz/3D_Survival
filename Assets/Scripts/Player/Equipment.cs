@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 public class Equipment : MonoBehaviour
 {
     public Equip curEquip;
@@ -32,12 +29,33 @@ public class Equipment : MonoBehaviour
     {
         UnEquip();
         curEquip = Instantiate(data.equipPrefab, equipParent).GetComponent<Equip>();
+        curEquip.data = data; // 장비 데이터 설정
+        if (curEquip is EquipTool equipTool)
+        {
+            equipTool.ApplyAbilities(data.ability);
+        }
     }
 
     public void UnEquip()
     {
         if (curEquip != null)
         {
+            // 장착 해제 시 이동 속도를 원래대로 되돌림
+            if (curEquip is EquipTool equipTool)
+            {
+                foreach (var ability in equipTool.data.ability) // curEquip.data 참조
+                {
+                    if (ability.type == EquipAbilityType.Speed)
+                    {
+                        controller.ModifyMoveSpeed(-ability.value);
+                    }
+                }
+            }
+
+            // 장비 데이터를 null로 설정하여 장비 해제를 나타냄
+            curEquip.data = null;
+            controller.currentMoveSpeed = controller.moveSpeed;
+
             Destroy(curEquip.gameObject);
             curEquip = null;
         }

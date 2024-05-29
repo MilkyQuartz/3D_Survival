@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61494595e4137e04b9ea884c45d5f77e, type: 3}
-  m_Name: ItemAx
+  m_Name: Item_Ax
   m_EditorClassIdentifier: 
   displayName: "\uB3C4\uB07C"
   description: "\uC790\uC6D0\uC744 \uCC44\uCDE8\uD560 \uB54C \uC0AC\uC6A9\uD569\uB2C8\uB2E4."
@@ -20,4 +20,8 @@ MonoBehaviour:
   canStack: 0
   maxStackAmount: 0
   consumables: []
+  specialConsumable: []
   equipPrefab: {fileID: 9130182874444443358, guid: 9fa604b16079935428168c3c51459f70, type: 3}
+  ability:
+  - type: 1
+    value: 20
