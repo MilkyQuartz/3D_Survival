@@ -3,50 +3,68 @@ using UnityEngine;
 public class TrickRay : MonoBehaviour, IInteractable
 {
     public TrickItemData trickItemData;
-    public Transform rayA;
-    public Transform rayB;
-    public LayerMask layerMask;
+    public Transform[] laserStartPoints; 
+    private Transform[] laserDirections; 
+    public float shootInterval;
+    public LayerMask groundLayerMask; 
+    private float maxLaserLength; 
+    private float lastShootTime; 
 
-    private LineRenderer lineRenderer;
-
-    private void Start()
+    void Start()
     {
-        if(trickItemData.trickItemType == TrickItemType.Ray)
+        laserDirections = new Transform[laserStartPoints.Length];
+        for (int i = 0; i < laserDirections.Length; i++)
         {
-            SetupRay();
+            laserDirections[i] = transform; 
+        }
+        maxLaserLength = CalculateMaxLaserLength();
+    }
+
+    void Update()
+    {
+        if (Time.time - lastShootTime >= shootInterval)
+        {
+            for (int i = 0; i < laserStartPoints.Length; i++)
+            {
+                ShootLaser(laserStartPoints[i], laserDirections[i]);
+            }
+            lastShootTime = Time.time;
         }
     }
 
-    private void SetupRay()
+    float CalculateMaxLaserLength()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        if (lineRenderer == null)
+        RaycastHit hit;
+        float maxDistance = 30f;
+        foreach (var startPoint in laserStartPoints)
         {
-            lineRenderer = gameObject.AddComponent<LineRenderer>();
+            if (Physics.Raycast(startPoint.position, Vector3.down, out hit, maxDistance, groundLayerMask))
+            {
+                if (hit.distance < maxDistance)
+                {
+                    maxDistance = hit.distance;
+                }
+            }
         }
-        lineRenderer.positionCount = 2;
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
+        return maxDistance;
     }
 
-    private void Update()
+    void ShootLaser(Transform startPoint, Transform direction)
     {
-        if (lineRenderer != null)
-        {
-            lineRenderer.SetPosition(0, rayA.position);
-            lineRenderer.SetPosition(1, rayB.position);
-        }
-        float distance = Vector3.Distance(rayA.position, rayB.position);
+        Vector3 startPos = startPoint.position;
+        Vector3 directionVector = Vector3.down;
 
         RaycastHit hit;
-        if (Physics.Raycast(rayA.position, rayB.position - rayA.position, out hit, distance, layerMask))
+        if (Physics.Raycast(startPos, directionVector, out hit, maxLaserLength))
         {
-            if (hit.transform == rayB)
+            Debug.DrawRay(startPos, directionVector * hit.distance, Color.red, 2f);
+            if (hit.collider.CompareTag("Player"))
             {
-                Debug.Log("rayA에서 rayB를 감지함");
+                Debug.Log("레이저 구간 지나감");
             }
         }
     }
+
 
     public string GetInteractPrompt()
     {
