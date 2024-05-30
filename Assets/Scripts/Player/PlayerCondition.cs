@@ -19,21 +19,35 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     Condition cold { get { return uiCondition.cold; } }
 
     public float noHungerHealthDecay;
+    public float coldRecoveryRate;
+    public float coldDecayRate;
     public event Action OnTakeDamage;
-
+    public DayNightCycle dayNightCycle;
     void Start()
     {
-        
+        if (dayNightCycle == null)
+        {
+            dayNightCycle = FindObjectOfType<DayNightCycle>();
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         hunger.Subtract(hunger.regenRate * Time.deltaTime);
         stamina.Add(stamina.regenRate * Time.deltaTime);
-        cold.Subtract(cold.regenRate * Time.deltaTime);
 
-        if(hunger.curValue == 0f || cold.curValue == 0f)
+        // 아침이면 추위 회복됨
+        if (dayNightCycle.time >= 0.25f && dayNightCycle.time <= 0.75f)
+        {
+            cold.Add(coldRecoveryRate * Time.deltaTime);
+        }
+        // 밤이면 추위타서 깎이는데 0되면 체력에도 영향감
+        else
+        {
+            cold.Subtract(coldDecayRate * Time.deltaTime);
+        }
+
+        if (hunger.curValue == 0f || cold.curValue == 0f)
         {
             health.Subtract(noHungerHealthDecay * Time.deltaTime);
         }
