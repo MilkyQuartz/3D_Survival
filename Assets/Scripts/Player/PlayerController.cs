@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public GameObject objectB;
     private bool isObjectAActive = true;
     private TrickItemObject currentTrickItem;
+    private bool isUIVisible = false;
+    private Image uiImage; 
 
     private void Awake()
     {
@@ -127,6 +131,22 @@ public class PlayerController : MonoBehaviour
     {
         currentTrickItem = item;
     }
+
+    public void SetUIImages(Image image)
+    {
+        this.uiImage = image;
+    }
+
+    public void OnInteractiveItem(InputAction.CallbackContext context)
+    {
+        if (uiImage != null)
+        {
+            isUIVisible = !isUIVisible;
+            uiImage.gameObject.SetActive(isUIVisible);
+        }
+    }
+
+
     private void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;

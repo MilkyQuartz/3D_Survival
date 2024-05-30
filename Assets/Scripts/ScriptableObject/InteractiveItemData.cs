@@ -1,17 +1,17 @@
-    using UnityEngine;
+using UnityEngine;
 
-    public enum InteractiveItemType
-    {
-        Button
-    }
+public enum InteractiveItemType
+{
+    Button
+}
 
-    [CreateAssetMenu(fileName = "InteractiveItem", menuName = "Interactive New Item")]
-    public class InteractiveItemData : ScriptableObject
-    {
-        [Header("Info")]
-        public InteractiveItemType trickItemType;
-        public string description;
+[CreateAssetMenu(fileName = "InteractiveItem", menuName = "Interactive New Item")]
+public class InteractiveItemData : ScriptableObject
+{
+    [Header("Info")]
+    public InteractiveItemType trickItemType;
+    public string description;
 
-    [Header("Button")]
-        public GameObject buttonPrefab;
+[Header("Button")]
+    public GameObject buttonPrefab;
 }

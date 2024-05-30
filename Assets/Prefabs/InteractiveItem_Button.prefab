@@ -150,4 +150,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca04ee551a5aa94ab22d7bb6d8ce55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactiveItemData: {fileID: 0}
+  interactiveItemData: {fileID: 11400000, guid: 8a534b6631ef3854c8ae008196d2f34f, type: 2}
+  uiImage: {fileID: 0}
