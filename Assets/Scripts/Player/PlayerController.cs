@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public bool canLook = true;
 
     public Action inventory;
+    public Action setting;
 
     protected Rigidbody rigidbody;
     public GameObject objectA;
@@ -126,7 +128,14 @@ public class PlayerController : MonoBehaviour
         Vector3 mid = Vector3.Lerp(start, end, t);
         return new Vector3(mid.x, f(t) + Mathf.Lerp(start.y, end.y, t), mid.z);
     }
-
+    public void OnPreferenceButton(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            setting?.Invoke();
+            ToggleCursor();
+        }
+    }
     public void SetCurrentTrickItem(TrickItemObject item)
     {
         currentTrickItem = item;

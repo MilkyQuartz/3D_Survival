@@ -78,9 +78,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "BtnInteraction",
+                    "name": "Preference",
                     "type": "Button",
-                    "id": "130972b8-93de-4a73-aab7-6d944aa16f06",
+                    "id": "1814a053-b1fd-4408-a80a-59fa05319f4c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -222,12 +222,12 @@
                 },
                 {
                     "name": "",
-                    "id": "26762ec8-8a8a-438b-94b3-25b8d783f709",
-                    "path": "<Keyboard>/f",
+                    "id": "35d5879b-40b4-4f17-942d-bea1d8837ae4",
+                    "path": "<Keyboard>/backquote",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "BtnInteraction",
+                    "action": "Preference",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
